@@ -1,0 +1,19 @@
+# Environment / secrets
+.env
+
+# Python
+__pycache__/
+*.pyc
+venv/
+.venv/
+
+# Logs & runtime artifacts
+logs/*.log
+static/screenshots/*.png
+data/*.csv
+!static/screenshots/.gitkeep
+!data/.gitkeep
+
+# OS
+.DS_Store
+Thumbs.db

@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RPA Control Deck · OrangeHRM Automation</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+<div class="bg-aura" aria-hidden="true"></div>
+
+<div class="shell">
+
+  <!-- ============ TOPBAR ============ -->
+  <header class="topbar">
+    <div class="brand">
+      <span class="brand-mark">RPA</span>
+      <div class="brand-text">
+        <p class="brand-eyebrow">Control Deck</p>
+        <h1 class="brand-title">OrangeHRM Employee Automation</h1>
+      </div>
+    </div>
+    <div class="topbar-meta">
+      <span class="pill" id="targetPill">opensource-demo.orangehrmlive.com</span>
+      <span class="pill pill-live" id="statusPill">
+        <span class="dot"></span> Idle
+      </span>
+    </div>
+  </header>
+
+  <!-- ============ HERO GRID: FORM + PIPELINE ============ -->
+  <main class="hero-grid">
+
+    <!-- LEFT: CONTROL FORM -->
+    <section class="glass card-form" aria-labelledby="formTitle">
+      <div class="card-head">
+        <span class="eyebrow">01 · Inputs</span>
+        <h2 id="formTitle">Automation Parameters</h2>
+        <p class="card-sub">Every field below is sent to the backend, which drives the live browser session. Nothing here is hardcoded server-side.</p>
+      </div>
+
+      <form id="automationForm" autocomplete="off">
+        <fieldset class="field-group">
+          <legend>Login Credentials</legend>
+
+          <label class="field">
+            <span class="field-label">Username <em>*</em></span>
+            <input type="text" name="username" id="username" placeholder="Enter OrangeHRM username" required />
+          </label>
+
+          <label class="field">
+            <span class="field-label">Password <em>*</em></span>
+            <input type="password" name="password" id="password" placeholder="Enter OrangeHRM password" required />
+          </label>
+        </fieldset>
+
+        <fieldset class="field-group">
+          <legend>Employee Details</legend>
+
+          <div class="field-row">
+            <label class="field">
+              <span class="field-label">First Name <em>*</em></span>
+              <input type="text" name="first_name" id="first_name" placeholder="Aarav" required />
+            </label>
+            <label class="field">
+              <span class="field-label">Last Name <em>*</em></span>
+              <input type="text" name="last_name" id="last_name" placeholder="Mehta" required />
+            </label>
+          </div>
+
+          <label class="field">
+            <span class="field-label">Employee ID <em class="optional">optional, max 10 chars</em></span>
+            <input type="text" name="employee_id" id="employee_id" placeholder="Auto-assigned if left blank" maxlength="10" />
+          </label>
+        </fieldset>
+
+        <button type="submit" class="btn-run" id="runBtn">
+          <span class="btn-label">Run Automation</span>
+          <span class="btn-spinner" aria-hidden="true"></span>
+        </button>
+
+        <p class="form-note" id="formNote"></p>
+      </form>
+    </section>
+
+    <!-- RIGHT: LIVE PIPELINE -->
+    <section class="glass card-pipeline" aria-labelledby="pipelineTitle">
+      <div class="card-head">
+        <span class="eyebrow">02 · Execution</span>
+        <h2 id="pipelineTitle">Automation Pipeline</h2>
+        <p class="card-sub">Each stage lights up as the Selenium session progresses through the real OrangeHRM UI.</p>
+      </div>
+
+      <ol class="pipeline" id="pipeline">
+        <li class="pipe-step" data-step="Open OrangeHRM">
+          <span class="pipe-node"><span class="pipe-icon">◎</span></span>
+          <div class="pipe-body">
+            <p class="pipe-title">Open OrangeHRM</p>
+            <p class="pipe-msg">Waiting to start…</p>
+          </div>
+        </li>
+        <li class="pipe-step" data-step="Login">
+          <span class="pipe-node"><span class="pipe-icon">🔑</span></span>
+          <div class="pipe-body">
+            <p class="pipe-title">Login</p>
+            <p class="pipe-msg">Waiting to start…</p>
+          </div>
+        </li>
+        <li class="pipe-step" data-step="Navigate to PIM">
+          <span class="pipe-node"><span class="pipe-icon">🧭</span></span>
+          <div class="pipe-body">
+            <p class="pipe-title">Navigate to PIM</p>
+            <p class="pipe-msg">Waiting to start…</p>
+          </div>
+        </li>
+        <li class="pipe-step" data-step="Add Employee">
+          <span class="pipe-node"><span class="pipe-icon">➕</span></span>
+          <div class="pipe-body">
+            <p class="pipe-title">Add Employee</p>
+            <p class="pipe-msg">Waiting to start…</p>
+          </div>
+        </li>
+        <li class="pipe-step" data-step="Verify Creation">
+          <span class="pipe-node"><span class="pipe-icon">✔</span></span>
+          <div class="pipe-body">
+            <p class="pipe-title">Verify Creation</p>
+            <p class="pipe-msg">Waiting to start…</p>
+          </div>
+        </li>
+        <li class="pipe-step" data-step="Extract Employee List">
+          <span class="pipe-node"><span class="pipe-icon">⇩</span></span>
+          <div class="pipe-body">
+            <p class="pipe-title">Extract Employee List</p>
+            <p class="pipe-msg">Waiting to start…</p>
+          </div>
+        </li>
+        <li class="pipe-step" data-step="Logout">
+          <span class="pipe-node"><span class="pipe-icon">⎋</span></span>
+          <div class="pipe-body">
+            <p class="pipe-title">Logout</p>
+            <p class="pipe-msg">Waiting to start…</p>
+          </div>
+        </li>
+      </ol>
+    </section>
+  </main>
+
+  <!-- ============ RESULTS ============ -->
+  <section class="glass card-results" id="resultsCard" aria-labelledby="resultsTitle">
+    <div class="card-head card-head-row">
+      <div>
+        <span class="eyebrow">03 · Output</span>
+        <h2 id="resultsTitle">Dashboard Results</h2>
+        <p class="card-sub">What was inserted, what came back, and the proof it happened.</p>
+      </div>
+      <button class="btn-ghost" id="downloadCsvBtn" disabled>⬇ Download CSV</button>
+    </div>
+
+    <div class="results-grid">
+      <!-- Inserted employee echo -->
+      <div class="result-block">
+        <h3>Inserted Employee</h3>
+        <dl class="employee-echo" id="employeeEcho">
+          <div class="echo-row"><dt>First Name</dt><dd id="echoFirst">—</dd></div>
+          <div class="echo-row"><dt>Last Name</dt><dd id="echoLast">—</dd></div>
+          <div class="echo-row"><dt>Employee ID</dt><dd id="echoId">—</dd></div>
+        </dl>
+      </div>
+
+      <!-- Before / after screenshots -->
+      <div class="result-block">
+        <h3>Before / After</h3>
+        <div class="shot-pair" id="shotPair">
+          <div class="shot-slot">
+            <span class="shot-label">Before</span>
+            <div class="shot-frame" id="shotBefore"><span class="shot-placeholder">No screenshot yet</span></div>
+          </div>
+          <div class="shot-slot">
+            <span class="shot-label">After</span>
+            <div class="shot-frame" id="shotAfter"><span class="shot-placeholder">No screenshot yet</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Extracted table -->
+    <div class="result-block table-block">
+      <h3>Extracted Employee List <span class="table-count" id="tableCount"></span></h3>
+      <div class="table-wrap">
+        <table id="employeeTable">
+          <thead>
+            <tr>
+              <th>Employee Id</th><th>First Name</th><th>Last Name</th><th>Job Title</th><th>Sub Unit</th><th>Status</th>
+            </tr>
+          </thead>
+          <tbody id="employeeTableBody">
+            <tr class="empty-row"><td colspan="6">Run the automation to populate this table.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <p>Dashboard-Driven Automation · Python + Selenium + Flask · Built for the RPA Practical Assignment</p>
+  </footer>
+</div>
+
+<script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>
