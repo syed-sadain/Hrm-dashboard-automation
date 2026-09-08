@@ -1,4 +1,4 @@
-# RPA Control Deck
+# 🤖 RPA Control Deck
 
 ### Dashboard-Driven OrangeHRM Employee Automation
 
